@@ -25,7 +25,7 @@ public class Product {
 		this.madeby = madeby;
 	}
 
-	// 상품리스트 -> pno, pname, price, regdate
+	// 상품리스트 -> pno, pname, price
 	public Product(int pno, String pname, int price) {
 		this.pno = pno;
 		this.pname = pname;

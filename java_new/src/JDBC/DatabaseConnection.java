@@ -14,7 +14,7 @@ public class DatabaseConnection {
 	private static DatabaseConnection dbc = new DatabaseConnection();
 	private Connection conn = null; // Connection import(연결정보 넣을 곳)
 	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-	private String jdbcUrl = "jdbc:mysql://localhost:3306/productdb";
+	private String jdbcUrl = "jdbc:mysql://localhost:3306/productdb"; //mysql고정된url.뒤에 db이름만 바꾸면 됨
 
 	// 생성자를 private으로 생성
 	private DatabaseConnection() {

@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductDAOImpl implements DAO {
-	// (DAO : data excess object)
+	// (DAO : data exccess object)
 	// MVC패턴 : 커트롤러->서비스->다오->DB || 커트롤러<-서비스<-다오<-DB
 
 	// DB연결
-	private Connection conn;
+	private Connection conn; // Connection import
 
 	// sql 구문을 실행시키는 기능을 갖는 객체
 	private PreparedStatement pst;
@@ -19,6 +19,7 @@ public class ProductDAOImpl implements DAO {
 
 	public ProductDAOImpl() {
 		DatabaseConnection dbc = DatabaseConnection.getInstance();
+
 		conn = dbc.getConnection();
 	}
 
@@ -64,13 +65,14 @@ public class ProductDAOImpl implements DAO {
 	}
 
 	@Override
+	// selectOne
 	public Product selectOne(int pno) {
 		System.out.println("detail DAO success!!");
 		query = "select * from product where pno=?";
 		try {
 			pst = conn.prepareStatement(query);
-			pst.setInt(1, pno);//1번 물음표에 pno넣기
-			ResultSet rs = pst.executeQuery();//select의 결과값
+			pst.setInt(1, pno);// 1번 물음표에 pno넣기
+			ResultSet rs = pst.executeQuery();// select의 결과값
 			if (rs.next()) {
 				return new Product(rs.getInt("pno"), rs.getString("pname"), rs.getInt("price"), rs.getString("regdate"),
 						rs.getString("madeby"));
@@ -81,6 +83,46 @@ public class ProductDAOImpl implements DAO {
 		}
 
 		return null;
+	}
+
+	@Override
+	// update
+	public int update(Product p) {
+
+		System.out.println("update DAO success!!");
+		query = "update product set pname=?,price=?,madeby=?,regdate=now() where pno=?";
+		try {
+			// query 구문을 DB에 실행
+			pst = conn.prepareStatement(query);
+			pst.setString(1, p.getPname());
+			pst.setInt(2, p.getPrice());
+			pst.setString(3, p.getMadeby());
+			pst.setInt(4, p.getPno());
+			return pst.executeUpdate();// 잘되면 1 안되면0 리턴하는 애
+
+		} catch (SQLException e) {
+			// SQL구문 오류
+			System.out.println("update Error!!");
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	// delete
+	public int delete(int pno) {
+		System.out.println("delete DAO success!!");
+		query = "delete from product where pno=?";
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setInt(1, pno);
+			return pst.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("delete Error!!");
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }
