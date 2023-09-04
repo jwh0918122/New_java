@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;orn&apos; to &apos;orm&apos;&#x0D;&#x0A;- Original project: &apos;jsp_board&apos;&#x0D;&#x0A;- Original element: &apos;jsp_board/src/main/java/orn&apos;&#x0D;&#x0A;- Renamed element: &apos;jsp_board/src/main/java/orm&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;orn&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java&lt;orn" name="orm" qualified="false" references="true" stamp="1693826824312" textual="false" version="1.0"/>
+</session>
