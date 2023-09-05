@@ -6,5 +6,17 @@
   <!-- mapper는 DB마다 한개씩 생성. 그래서 이름 붙여줌(namespace) -->
   <mapper namespace="BoardMapper"> 
   <!-- SQL 구문별 생성 -->
+  <!-- SQL 구문별 id namespace.id-->
+  <!-- paramiterType = 가져온 객체, resultType = 결과 객체 -->
+  <insert id="add" parameterType="bvo" > <!-- config에서 alias로 bvo썼었음 -->
+  	insert into board(title, writer, content)
+  	values(#{title}, #{writer}, #{content})
+  </insert>
+  <select id="list" resultType="bvo">
+  	select * from board order by bno desc 
+  </select>
+  <select id="detail" parameterType="int" resultType="bvo">
+  select * from board where bno = #{bno}
   
+  </select>
   </mapper>

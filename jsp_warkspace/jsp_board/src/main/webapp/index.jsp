@@ -11,10 +11,10 @@
 
 <ul>
 	<li>
-		<a href="#">게시판 글쓰기로 이동...</a>
+		<a href="/brd/register">게시판 글쓰기로 이동...</a><!-- "/brd/register" => 컨트롤러의 register메서드로 이동 -->
 	</li>
 	<li>
-		<a href="#">게시판 리스트로 이동...</a>
+		<a href="/brd/list">게시판 리스트로 이동...</a><!-- "/brd/list" => 컨트롤러의 list메서드로 이동 -->
 	</li>
 </ul>
 </body>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- mapper는 DB마다 한개씩 생성. 그래서 이름 붙여줌(namespace) -->
+  <mapper namespace="BoardMapper"> 
+  <!-- SQL 구문별 생성 -->
+  <!-- SQL 구문별 id namespace.id-->
+  <insert id="">
+  
+  </insert>
+  
+  </mapper>
