@@ -1,9 +1,0 @@
-package dao;
-
-import domain.BoardVO;
-
-public interface BoardDAO {
-
-	Object insert(BoardVO bvo);
-
-}

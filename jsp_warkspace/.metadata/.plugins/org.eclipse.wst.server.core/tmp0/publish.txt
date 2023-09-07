@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Tue Sep 05 21:33:42 KST 2023
-org.eclipse.jst.jee.server\:/binary\:D\:\\\uC7A5\uC6D0\uD76C\\jsp_warkspace\\jsp_board\\src\\main\\webapp\\WEB-INF\\lib\\log4j-web-2.18.0.jar=WEB-INF/lib/log4j-web-2.18.0.jar
