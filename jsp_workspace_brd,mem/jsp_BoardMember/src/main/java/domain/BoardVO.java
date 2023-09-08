@@ -14,7 +14,6 @@ public class BoardVO {
 	
 	//insert용
 	public BoardVO(String title, String writer, String content) {
-		super();
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
@@ -22,7 +21,6 @@ public class BoardVO {
 
 	//update용
 	public BoardVO(int bno, String title, String content) {
-		super();
 		this.bno = bno;
 		this.title = title;
 		this.content = content;
@@ -30,7 +28,6 @@ public class BoardVO {
 	
 	//list용
 	public BoardVO(int bno, String title, String writer, String regdate, String moddate) {
-		super();
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;

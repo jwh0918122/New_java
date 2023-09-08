@@ -41,7 +41,7 @@ public class BoardController extends HttpServlet {
 		// encoding 설정, contentType 설정, 요청경로 파악
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8"); // jsp파일 가면 contentType 있음 복붙해
+		response.setContentType("text/html; charset=UTF-8"); // jsp파일 가면 contentType 있음. 복붙해
 
 		// jsp에서 오는 요청 주소
 		String uri = request.getRequestURI();// /brd/register
@@ -144,8 +144,9 @@ public class BoardController extends HttpServlet {
 
 			break;
 		}
-
+		//목적지 주소값 세팅
 		rdp = request.getRequestDispatcher(destPage);
+		//정보 실어 보내기
 		rdp.forward(request, response);
 	}
 

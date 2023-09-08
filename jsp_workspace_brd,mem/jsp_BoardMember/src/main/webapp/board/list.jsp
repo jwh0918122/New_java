@@ -26,7 +26,7 @@
 </tr>
 </c:forEach>
 </table>
-<a href="/board/index.jsp"><button type="button">index</button></a>
+<a href="/index.jsp"><button type="button">index</button></a>
 <a href="/board/register.jsp"><button type="button">글 등록</button></a>
 </body>
 </html>

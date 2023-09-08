@@ -3,3 +3,9 @@
 9월 07, 2023 15:51:34.80 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 9월 07, 2023 15:57:01.571 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 9월 07, 2023 15:59:10.246 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+
+9월 08, 2023 15:57:20.255 NEW SESSION
+9월 08, 2023 15:57:20.255 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+9월 08, 2023 20:32:01.896 [5976:2648:0908/203201.895:ERROR:CONSOLE(1)] "Uncaught (in promise) RangeError: Invalid line number 32 in 1-line document", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)
+9월 08, 2023 20:32:51.328 [5976:2648:0908/203251.328:ERROR:CONSOLE(1)] "Uncaught (in promise) RangeError: Invalid line number 32 in 1-line document", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)
+9월 08, 2023 20:33:18.50 [5976:2648:0908/203318.049:ERROR:CONSOLE(1)] "Uncaught (in promise) RangeError: Invalid line number 32 in 1-line document", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)
