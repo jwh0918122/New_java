@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
+import handler.PagingHandler;
 import service.BoardServiceImpl;
 import service.Service;
 
@@ -86,6 +88,35 @@ public class BoardController extends HttpServlet {
 				log.info("list error!!");
 			}
 			break;
+		case "pageList":
+			try {
+				// PagingVO
+				PagingVO pgvo = new PagingVO(); // 기본생성자 =>PagingVO(1,10)이 기본
+				// jsp에서 파라미터 받기
+				if (request.getParameter("pageNo") != null) {
+					int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+					int qty = Integer.parseInt(request.getParameter("qty"));
+					log.info("pageNo" + pageNo + "qty" + qty);
+					pgvo = new PagingVO(pageNo, qty);
+				}
+				//totalCount
+				int totalCount = bsv.getTotalCount(); // DB에 전체 카운트 요청
+				log.info("전체 게시글 수 : " + totalCount);
+				// bsv한테 pgvo주고, limit 적용한 리스트 10개 가져오기
+				List<BoardVO> list = bsv.getPageList(pgvo);
+				request.setAttribute("list", list);
+				// 페이지 정보를 list.jsp로 보내기
+				PagingHandler ph = new PagingHandler(pgvo, totalCount);
+				request.setAttribute("ph", ph);
+				log.info("paging 성공~~!!");
+				destPage = "/board/list.jsp";
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			break;
+
 		case "detail":// 자세히 보기
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
@@ -135,7 +166,7 @@ public class BoardController extends HttpServlet {
 				log.info("remove check 1");
 				isOk = bsv.remove(bno);
 				log.info(isOk > 0 ? "OK" : "FAIL");
-				destPage = "list";
+				destPage = "pageList";
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -144,9 +175,9 @@ public class BoardController extends HttpServlet {
 
 			break;
 		}
-		//목적지 주소값 세팅
+		// 목적지 주소값 세팅
 		rdp = request.getRequestDispatcher(destPage);
-		//정보 실어 보내기
+		// 정보 실어 보내기
 		rdp.forward(request, response);
 	}
 
@@ -161,3 +192,4 @@ public class BoardController extends HttpServlet {
 	}
 
 }
+

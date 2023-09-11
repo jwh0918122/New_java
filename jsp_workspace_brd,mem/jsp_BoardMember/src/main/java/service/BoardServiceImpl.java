@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.BoardController;
 import domain.BoardVO;
+import domain.PagingVO;
 import repository.BoardDAO;
 import repository.BoardDAOImpl;
 
@@ -52,5 +53,15 @@ public class BoardServiceImpl implements Service {
 	public int remove(int bno) {
 		log.info("remove sevice ok");
 		return bdao.remove(bno);
+	}
+
+	@Override
+	public int getTotalCount() {		
+		return bdao.getTotalCount();
+	}
+
+	@Override
+	public List<BoardVO> getPageList(PagingVO pgvo) {
+		return bdao.getPageList(pgvo);
 	}
 }

@@ -133,6 +133,47 @@ public class MemberController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "modify":
+			destPage="/member/modify.jsp";			
+			break;
+		case "update":
+			try {
+				//jsp에서 보낸 파라미터 가져와서 mvo 객체 생성
+				String id=request.getParameter("id");
+				String pwd=request.getParameter("pwd");
+				String email=request.getParameter("email");
+				int age=Integer.parseInt(request.getParameter("age"));
+				MemberVO mvo = new MemberVO(id, pwd, email, age);
+				//msv에게 수정 요청 -> mdao 수정 요청 -> mapper 수정 요청
+				isOk=msv.modify(mvo);
+				log.info(isOk>0?"OK":"FAIL");
+				//세션 끊고, index.jsp로 이동 (다시 로그인하게)
+//				HttpSession ses = request.getSession(); //세션 가져오기
+//				ses.invalidate();//세션 끊기
+				destPage="logout"; //로그아웃에서 하는 기능이랑 같으니까 이렇게 해도 됨.
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			break;
+		case "remove":
+			try {
+				//세션에 저장된 id,pwd 가져오기
+				HttpSession ses = request.getSession(); // 현재 로그인된 정보
+				MemberVO mvo = (MemberVO)ses.getAttribute("ses");
+				String id = mvo.getId();
+				//msv에 id주고 객체 삭제 요청 -> mdao id주고 삭제 요청 -> mapper 삭제
+				isOk=msv.remove(id);
+				log.info(isOk>0?"OK":"FAIL");				
+				//세션 끊고, index.jsp로 이동
+				ses.invalidate(); //로그아웃으로 가면 lastlogin이 없기 때문에 에러가 남
+				destPage="/index.jsp";
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			break;
 		}
 		// 목적지 주소값 세팅
 		rdp = request.getRequestDispatcher(destPage);

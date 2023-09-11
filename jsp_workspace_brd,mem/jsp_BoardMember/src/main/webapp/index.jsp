@@ -23,7 +23,7 @@ ${ses.id } login 하였습니다.<br>
 계정 생성일 : ${ses.regdate }<br>
 마지막 접속 : ${ses.lastlogin }<br>
 <hr>
-<a href="#"><button type="button">회원정보 수정</button></a><br>
+<a href="/mem/modify"><button type="button">회원정보 수정</button></a><br>
 <a href="/mem/list"><button type="button">회원리스트</button></a><br>
 <a href="/mem/logout"><button type="button">로그아웃</button></a><br>
 <a href="/brd/register"><button type="button">글 쓰기</button></a>
@@ -33,7 +33,7 @@ ${ses.id } login 하였습니다.<br>
 </div>
 <a href="/mem/join"><button type="button">회원가입</button></a><br>
 
-<a href="/brd/list"><button type="button">리스트로 이동</button></a>
+<a href="/brd/pageList"><button type="button">리스트로 이동</button></a>
 
 <%-- <c:out value="${msg_login }"></c:out> => c:out은 그냥 표현하는 것   --%>
 

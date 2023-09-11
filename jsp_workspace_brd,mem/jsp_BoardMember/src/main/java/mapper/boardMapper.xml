@@ -9,7 +9,7 @@
  values(#{title},#{writer},#{content})
  </insert>
  <select id="selectList" resultType="bvo">
- select * from board order by bno desc
+ select * from board order by bno desc 
  </select>
  <select id="selectOne" resultType="bvo" parameterType="int">
  select * from board where bno=#{bno}
@@ -21,6 +21,13 @@
  <delete id="remove" parameterType="int">
  delete from board where bno=#{bno}
  </delete>
+ <select id="cnt" resultType="int">
+ select count(*) from board
+ </select>
+ <select id="page" parameterType="pgvo" resultType="bvo" >
+ select * from board order by bno desc
+ limit #{pageStart},#{qty}
+ </select>
  
  
  

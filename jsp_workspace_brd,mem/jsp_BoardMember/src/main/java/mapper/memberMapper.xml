@@ -17,6 +17,13 @@
  <select id="list" resultType="mvo">
  select * from member
  </select>
+ <update id="modify" parameterType="mvo">
+ update member set pwd=#{pwd}, email=#{email}, age=#{age} 
+ where id=#{id}
+ </update>
+ <delete id="del" parameterType="string">
+ delete from member where id=#{id}
+ </delete>
  
  
  

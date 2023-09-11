@@ -33,7 +33,7 @@
 	<td>${bvo.moddate}</td>
 </tr>
 </table>
-<a href="/brd/list"><button type="button">목록(list)</button></a>
+<a href="/brd/pageList"><button type="button">목록(list)</button></a>
 <a href="/brd/modify?bno=${bvo.bno }"><button type="button">수정(modify)</button></a>
 <a href="/brd/remove?bno=${bvo.bno }"><button type="button">삭제(remove)</button></a>
 </body>

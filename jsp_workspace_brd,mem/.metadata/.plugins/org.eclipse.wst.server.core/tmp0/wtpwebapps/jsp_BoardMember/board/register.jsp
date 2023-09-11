@@ -11,7 +11,7 @@
 <hr>
 <form action="/brd/insert"> <!-- controller의 insert메서드로 이동 -->
 제목 : <input type="text" name="title"><br>
-작성자 : <input type="text" name="writer"><br>
+작성자 : <input type="text" name="writer" value="${ses.id }" readonly="readonly"><br>
 내용 : <textarea rows="3" cols="30" name="content"></textarea><br>
 <button type="submit">등록</button>
 </form>
