@@ -1,0 +1,32 @@
+package domain;
+
+public class MemberVO {
+	private String id;
+	private String pw;
+	private int age;
+	private String email;
+	private String regdate;
+	private String moddate;
+	
+	public MemberVO() {}
+	
+	//로그인용 생성자
+	public MemberVO(String id, String pw) {
+		super();
+		this.id = id;
+		this.pw = pw;
+	}
+	
+	//회원 등록, 수정용 생성자(join, modify)
+	public MemberVO(String id, String pw, int age, String email) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.age = age;
+		this.email = email;
+	}
+	
+	
+	
+
+}

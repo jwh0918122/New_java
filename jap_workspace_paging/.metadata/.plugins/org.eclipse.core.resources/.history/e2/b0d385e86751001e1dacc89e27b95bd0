@@ -1,0 +1,14 @@
+package repository;
+
+import domain.MemberVO;
+
+public class MemberDAOImpl implements MemberDAO {
+
+	@Override
+	//login
+	public MemberVO login(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
