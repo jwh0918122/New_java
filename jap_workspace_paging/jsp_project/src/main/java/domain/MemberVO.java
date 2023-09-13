@@ -2,39 +2,39 @@ package domain;
 
 public class MemberVO {
 	private String id;
-	private String pw;
+	private String pwd;
 	private int age;
 	private String email;
 	private String regdate;
-	private String moddate;
+	private String lastlogin;
 	
 	public MemberVO() {}
 	
 	//로그인용 생성자
-	public MemberVO(String id, String pw) {
+	public MemberVO(String id, String pwd) {
 		super();
 		this.id = id;
-		this.pw = pw;
+		this.pwd = pwd;
 	}
 	
 	//회원 등록, 수정용 생성자(join, modify)
-	public MemberVO(String id, String pw, int age, String email) {
+	public MemberVO(String id, String pwd, int age, String email) {
 		super();
 		this.id = id;
-		this.pw = pw;
+		this.pwd = pwd;
 		this.age = age;
 		this.email = email;
 	}
 	
 	//회원리스트 출력용 생성자
-	public MemberVO(String id, String pw, int age, String email, String regdate, String moddate) {
+	public MemberVO(String id, String pwd, int age, String email, String regdate, String lastlogin) {
 		super();
 		this.id = id;
-		this.pw = pw;
+		this.pwd = pwd;
 		this.age = age;
 		this.email = email;
 		this.regdate = regdate;
-		this.moddate = moddate;
+		this.lastlogin = lastlogin;
 	}
 
 	public String getId() {
@@ -45,12 +45,12 @@ public class MemberVO {
 		this.id = id;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public int getAge() {
@@ -77,18 +77,18 @@ public class MemberVO {
 		this.regdate = regdate;
 	}
 
-	public String getModdate() {
-		return moddate;
+	public String getlastlogin() {
+		return lastlogin;
 	}
 
-	public void setModdate(String moddate) {
-		this.moddate = moddate;
+	public void setlastlogin(String lastlogin) {
+		this.lastlogin = lastlogin;
 	}
 
 	@Override
 	public String toString() {
-		return "id=" + id + ", pw=" + pw + ", age=" + age + ", email=" + email + ", regdate=" + regdate
-				+ ", moddate=" + moddate ;
+		return "id=" + id + ", pwd=" + pwd + ", age=" + age + ", email=" + email + ", regdate=" + regdate
+				+ ", lastlogin=" + lastlogin ;
 	}
 	
 	

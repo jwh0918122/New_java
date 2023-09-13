@@ -2,3 +2,8 @@
 1694519523566	Delete element
 1694521379175	Rename compilation unit 'Service.java'
 1694521576626	Delete element
+1694588353150	Delete element
+1694588400799	Rename local variable 'pw'
+1694590490901	Rename field 'moddate'
+1694599769065	Rename resource 'list.jsp'
+1694605876370	Rename compilation unit 'pagingVO.java'
