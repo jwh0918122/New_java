@@ -26,9 +26,16 @@
 				<td>${tmp.moddate }</td>
 			</tr>
 		</c:forEach>
-
 	</table>
 
+<!-- 페이지네이션 표시 구역 -->
+<div>
+	<!-- prev -->
+	<c:if test=""></c:if>
+
+
+
+</div>
 
 </body>
 </html>

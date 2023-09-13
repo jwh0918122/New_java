@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -72,17 +73,32 @@ public class boardController extends HttpServlet {
 			}
 
 			break;
+//		case "list": // 리스트
+//			try {
+//				List<BoardVO> list = bsv.getList();
+//				request.setAttribute("list", list);
+//				destPage = "/board/boardlist.jsp";
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				log.info("list error!");
+//			}
+//
+//			break;
 		case "list": // 리스트
 			try {
+				//PagingVO
+				PagingVO pgvo = new PagingVO();//기본생성자=>PagingVO(1,10)이 기본
+				
 				List<BoardVO> list = bsv.getList();
 				request.setAttribute("list", list);
 				destPage = "/board/boardlist.jsp";
-
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				log.info("list error!");
 			}
-
+			
 			break;
 		case "detail": // 자세히
 			try {
