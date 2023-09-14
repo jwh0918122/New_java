@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
 import domain.PagingVO;
+import handler.PagingHandler;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -73,37 +74,68 @@ public class boardController extends HttpServlet {
 			}
 
 			break;
-//		case "list": // 리스트
-//			try {
-//				List<BoardVO> list = bsv.getList();
-//				request.setAttribute("list", list);
-//				destPage = "/board/boardlist.jsp";
-//
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				log.info("list error!");
-//			}
-//
-//			break;
+			
 		case "list": // 리스트
 			try {
-				//PagingVO
-				PagingVO pgvo = new PagingVO();//기본생성자=>PagingVO(1,10)이 기본
-				
 				List<BoardVO> list = bsv.getList();
 				request.setAttribute("list", list);
 				destPage = "/board/boardlist.jsp";
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				log.info("list error!");
 			}
+
+			break;
 			
+		case "pageList": // 리스트
+			try {
+				// PagingVO
+				PagingVO pgvo = new PagingVO();// 기본생성자=>PagingVO(1,10)이 기본
+				//boardlist.jsp에서 파라미터 받기(없다면(null)이라면 기본 생성자로 )
+				if (request.getParameter("pageNo") != null) {
+					int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+					int qty = Integer.parseInt(request.getParameter("qty"));
+					log.info("pageNo=> " + pageNo + " qty=> " + qty);
+					pgvo = new PagingVO(pageNo, qty);
+		
+				}
+				//검색어 받기
+				String type = request.getParameter("type");
+				String keyword = request.getParameter("keyword");
+				pgvo.setType(type);
+				pgvo.setKeyword(keyword);
+//				pgvo.setType(request.getParameter("type"));=>이렇게 한번에 해도 됨
+				
+				// totalCount
+				// DB에게 전체 게시글 카운트 요청
+				int totalCount = bsv.getTotalCount(pgvo);
+				log.info("전체 게시글 수 : " + totalCount);
+				// bsv한테 매개변수로 pgvo주고, limit 적용한 리스트 10개 가져오기
+				List<BoardVO> pageList = bsv.getPageList(pgvo);
+				// list를 request에 담기
+				request.setAttribute("pageList", pageList);
+				// 페이지 정보 request에 담기(boardlist.jsp로 보내야 하니까)
+				PagingHandler ph = new PagingHandler(pgvo, totalCount);
+				request.setAttribute("ph", ph);				
+				log.info("ph ={} ",ph);
+				log.info("paging 성공~~!!");
+				destPage = "/board/boardlist.jsp";
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.info("list error!");
+			}
+
 			break;
 		case "detail": // 자세히
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
 				BoardVO bvo = bsv.detail(bno);
+				
+				//조회수 
+				
+			
 				request.setAttribute("bvo", bvo);
 				log.info("bvo>>> " + bvo);
 				destPage = "/board/detail.jsp";
@@ -117,39 +149,38 @@ public class boardController extends HttpServlet {
 		case "modify": // bno에 해당하는 bvo를 가지고 수정 페이지로 이동
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
-				BoardVO bvo = bsv.detail(bno); //하는 기능이 detail랑 같으니까 써도 됨.
+				BoardVO bvo = bsv.detail(bno); // 하는 기능이 detail랑 같으니까 써도 됨.
 				request.setAttribute("bvo", bvo);
 				destPage = "/board/modify.jsp";
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			break;
-		case "edit" : //글 수정
+		case "edit": // 글 수정
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
-				String title=request.getParameter("title");
-				String content=request.getParameter("content");
-				
+				String title = request.getParameter("title");
+				String content = request.getParameter("content");
+
 				BoardVO bvo = new BoardVO(bno, title, content);
-				isOk=bsv.modify(bvo);
+				isOk = bsv.modify(bvo);
 				log.info(isOk > 0 ? "OK" : "FAIL");
-				destPage="detail?bno="+bno;
-				
-				
+				destPage = "detail?bno=" + bno;
+
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
+
 			break;
-		case "remove" :
+		case "remove":
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
-				isOk=bsv.remove(bno);
+				isOk = bsv.remove(bno);
 				log.info(isOk > 0 ? "OK" : "FAIL");
-				destPage="list";
-				
+				destPage = "pageList";
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -7,6 +7,7 @@ public class BoardVO {
 	private String content;
 	private String regdate;
 	private String moddate;
+	private int detailcnt;//조회수
 	
 	public BoardVO () {}
 	
@@ -27,13 +28,14 @@ public class BoardVO {
 	}
 	
 	//list용 생성자
-	public BoardVO(int bno, String title, String writer, String regdate, String moddate) {
+	public BoardVO(int bno, String title, String writer, String regdate, String moddate, int detailcnt) {
 		super();
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
 		this.regdate = regdate;
 		this.moddate = moddate;
+		this.detailcnt=detailcnt;
 	}
 	
 	//detail용 생성자
@@ -96,6 +98,14 @@ public class BoardVO {
 		this.moddate = moddate;
 	}
 	
+	public int getDetailcnt() {
+		return detailcnt;
+	}
+
+	public void setDetailcnt(int detailcnt) {
+		this.detailcnt = detailcnt;
+	}
+
 	//toString
 	@Override
 	public String toString() {

@@ -32,7 +32,7 @@
 	
 	<hr>
 	<a href="/mem/join"><button type="button">회원가입</button></a>
-	<a href="/brd/list"><button type="button">게시판으로 이동</button></a>
+	<a href="/brd/pageList"><button type="button">게시판으로 이동</button></a>
 	
 	
 	<script type="text/javascript">

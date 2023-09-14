@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>Board Detail Page</h1>
-	<table border=1">
+	<table border="1">
 		<tr>
 			<th>BNO</th>
 			<td>${bvo.bno }</td>
@@ -23,6 +23,10 @@
 			<td>${bvo.writer }</td>
 		</tr>
 		<tr>
+			<th>CONTENT</th>
+			<td>${bvo.content }</td>
+		</tr>
+		<tr>
 			<th>REG_DATE</th>
 			<td>${bvo.regdate }</td>
 		</tr>
@@ -34,7 +38,8 @@
 	
 	<a href="/brd/modify?bno=${bvo.bno }"><button>수정</button></a>
 	<a href="/brd/remove?bno=${bvo.bno }"><button>삭제</button></a>
-	<a href="/brd/list"><button>목록으로</button></a>
+	<a href="/brd/pageList"><button>목록으로</button></a>
+	<a href="/index.jsp"><button>인덱스로</button></a>
 
 
 </body>

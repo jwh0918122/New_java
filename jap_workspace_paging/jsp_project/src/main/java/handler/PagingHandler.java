@@ -9,21 +9,26 @@ public class PagingHandler {
 	private int realEndPage;//실제 전체 끝 페이지 번호
 	private boolean prev, next;//이전, 다음페이지 존재 여부(있거나, 없거나임)
 	
-	private PagingVO pgvo;//내가 클릭한 페이지숫자, 한 페이지에 들어가는 게시글 수
+	private PagingVO pgvo;//내가 클릭한 페이지숫자, 한 페이지에 들어가는 게시글 수(10)
 	private int totalCount;//전체 글 수
 	
 	public PagingHandler(PagingVO pgvo, int totalCount) {
+		this.pgvo = pgvo;
+		this.totalCount = totalCount;
+		
 		this.endPage=
-				(int)Math.ceil(pgvo.getPageNo()/(double)pgvo.getQty())*pgvo.getQty();
+				(int)Math.ceil(pgvo.getPageNo() / (double)pgvo.getQty()) * pgvo.getQty();
 		
 		this.startPage=this.endPage-9;
 		
-		this.realEndPage=(int)Math.ceil(totalCount/(double)pgvo.getQty());
-		if(this.realEndPage<this.endPage) {
-			this.endPage=this.realEndPage;
+		this.realEndPage=(int)Math.ceil(totalCount / (double)pgvo.getQty());
+		
+		if(this.realEndPage < this.endPage) {
+			this.endPage = this.realEndPage;
 		}
 		
-		this.prev=this.startPage>1;//존재여부(1보다 크면 존재)
+		this.prev=this.startPage > 1;//존재여부(1보다 크면 존재)
+		//startPage가 1이 아니란건 11,21,31...이라는 거임
 		this.next=this.endPage < realEndPage;
 	}
 
