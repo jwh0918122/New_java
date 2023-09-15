@@ -7,4 +7,9 @@
 			<item value="org.eclipse.jpt.jaxb"/>
 		</list>
 	</section>
+	<section name="EditorSelectionDialog">
+		<item key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION" value=".js"/>
+		<item key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL" value="true"/>
+		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="D:\장원희\VSCode-win32-x64-1.80.1\Code.exe"/>
+	</section>
 </section>

@@ -17,3 +17,12 @@ age int default 0,
 regdate datetime default now(),
 lastlogin datetime default now(),
 primary key(id));
+
+--comment table--
+create table comment(
+cno int auto_increment,
+bno int not null,
+writer varchar(200) not null default "unknown",
+content varchar(1000),
+regdate datetime default now(),
+primary key(cno));

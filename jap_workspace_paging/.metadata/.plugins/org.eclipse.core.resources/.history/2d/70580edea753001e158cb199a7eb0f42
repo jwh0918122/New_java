@@ -1,0 +1,17 @@
+//댓글 등록시 bno, writer, content
+document.getElementById('cmtAddBtn').addEventListener('click', () => {
+    const cmtText = document.getElementById('cmtText').value;
+    console.log(cmtText);
+    if (cmtText == null || cmtText == '') {
+        alert('댓글을 입력해주세요');
+        return false;
+    } else {
+        let cmtData = {
+            bno: bnoVal,
+            writer: document.getElementById('cmtWriter').value,
+            content: cmtText
+        };
+        //전송
+    }
+
+})

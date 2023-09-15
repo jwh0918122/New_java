@@ -22,9 +22,9 @@ public class PagingVO {
 	
 	//limit pageStart,qty  => pageStart에 들어갈 거 구하는거
 	//=> pageStart번지에 있는 게시물부터 qty개 가져와라(DB에 명령할거)
-	// 1페이지면 => (1-1) *10 =0
-	// 2페이지면 => (2-1) *10 =10
-	// 3페이지면 => (3-1) *10 =20
+	// (pageNo이)1페이지면 => (1-1) *10 =0
+	// (pageNo이)2페이지면 => (2-1) *10 =10
+	// (pageNo이)3페이지면 => (3-1) *10 =20
 	public int getPageStart() {
 		return (pageNo-1)*qty;
 	}

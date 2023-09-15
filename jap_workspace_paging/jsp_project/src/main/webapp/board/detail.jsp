@@ -5,6 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+	crossorigin="anonymous"></script>
 <title>Board Detail Page</title>
 </head>
 <body>
@@ -35,12 +44,45 @@
 			<td>${bvo.moddate }</td>
 		</tr>
 	</table>
-	
+
 	<a href="/brd/modify?bno=${bvo.bno }"><button>수정</button></a>
 	<a href="/brd/remove?bno=${bvo.bno }"><button>삭제</button></a>
 	<a href="/brd/pageList"><button>목록으로</button></a>
 	<a href="/index.jsp"><button>인덱스로</button></a>
 
+	<br>
+	<hr>
+	<div>
+		Comment Line<br>
+		<!-- 비동기방식은 name대신 id를 사용함 -->
+		<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly"><br> 
+		<input type="text" id="cmtText" placeholder="Add Comment"><br>
+		<button type="button" id="cmtAddBtn">댓글등록</button>
+		<br>
+
+	</div>
+	<br>
+	<!-- 댓글 표시라인 -->
+	<div class="accordion" id="accordionExample">
+		<!-- 댓글 아이템 1개 표시 영역 -->
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button" type="button"
+					data-bs-toggle="collapse" data-bs-target="#collapseOne"
+					aria-expanded="true" aria-controls="collapseOne">cno,
+					writer, regdate</button>
+			</h2>
+			<div id="collapseOne" class="accordion-collapse collapse show"
+				data-bs-parent="#accordionExample">
+				<div class="accordion-body">content</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	const bnoVal=`<c:out value="${bvo.bno}"/>`//* 이렇게 안하고 input hidden방식으로 해도 됨 */
+	</script>
+	<!-- js파일과 jsp파일 연결 -->
+	<script src="/resource/board_detail.js"></script>
 
 </body>
 </html>
