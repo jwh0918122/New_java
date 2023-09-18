@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -69,7 +71,6 @@ public class commentController extends HttpServlet {
 				// String 형태로 값을 받아 객체로 변환 JSON
 				// json-simple-1.1.1라이브러리를 사용하여
 				// json 형태의 String을 객체 형태로 변환
-				log.info("zzzzzzzzzzzzzzzzzzzzzzzzzz");
 				StringBuffer sb = new StringBuffer();
 				// append
 				String line = "";
@@ -80,11 +81,11 @@ public class commentController extends HttpServlet {
 				}
 				log.info(">>>>>> sb : " + sb.toString());
 
-				// 객체로 변환
+				// 객체로 변환(js파일에서 가져온거..?)
 				JSONParser parser = new JSONParser();
 				JSONObject jsonObj = (JSONObject) parser.parse(sb.toString());
 
-				//jsonObj는 map형태로 되어있음
+				// jsonObj는 map형태로 되어있음
 				// CommentVO 형태로 변환(CommentVO형태여야 DB에 넣을 수 있음)
 				int bno = Integer.parseInt(jsonObj.get("bno").toString());
 				String writer = jsonObj.get("writer").toString();
@@ -93,7 +94,7 @@ public class commentController extends HttpServlet {
 				// csv DB로 저장
 				CommentVO cvo = new CommentVO(bno, writer, content);
 				log.info(">>>cvo " + cvo);
-				isOk = csv.post(cvo); //cvo파라미터로 주고, 댓글 등록하기
+				isOk = csv.post(cvo); // cvo파라미터로 주고, 댓글 등록하기
 				log.info(isOk > 0 ? "OK" : "FAIL");
 
 				// 화면에 출력
@@ -105,6 +106,84 @@ public class commentController extends HttpServlet {
 				log.info(">> Comment > post > error");
 
 			}
+			break;
+		case "list": // list/151
+			try {
+				int bno = Integer.parseInt(pathVar);
+				List<CommentVO> list = csv.getList(bno);
+				log.info(">>> comment > list > " + list);
+				// json 형태로 변환 => 화면에 전송
+				JSONObject[] jsonObjArr = new JSONObject[list.size()];
+
+				JSONArray jsonList = new JSONArray();
+				for (int i = 0; i < list.size(); i++) {
+					jsonObjArr[i] = new JSONObject(); // key:value 형태
+					jsonObjArr[i].put("cno", list.get(i).getCno());
+					jsonObjArr[i].put("bno", list.get(i).getBno());
+					jsonObjArr[i].put("writer", list.get(i).getWriter());
+					jsonObjArr[i].put("content", list.get(i).getContent());
+					jsonObjArr[i].put("regdate", list.get(i).getRegdate());
+
+					jsonList.add(jsonObjArr[i]);
+				}
+				String jsonData = jsonList.toJSONString(); // 전송용
+
+				// 전송 객체에 싣고 화면으로 전송
+				PrintWriter out = response.getWriter();
+				out.print(jsonData); // 그럼 얘가 result가 됨
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.info(">>>Comment > list > error");
+			}
+
+			break;
+		case "modify":
+			try {
+				StringBuffer sb = new StringBuffer();
+				String line = "";
+				BufferedReader br = request.getReader();
+				while ((line = br.readLine()) != null) {
+					sb.append(line);
+				}
+				log.info(">>sb>> " + sb.toString());
+
+				// json 객체 형태로 만들어주기
+				JSONParser parser = new JSONParser();
+				JSONObject jsonObj = (JSONObject) parser.parse(sb.toString());
+
+				int cno = Integer.parseInt(jsonObj.get("cno").toString());
+				String content = jsonObj.get("content").toString();
+
+				CommentVO cvo = new CommentVO(cno, content);
+				isOk = csv.modify(cvo);
+				log.info(isOk > 0 ? "OK" : "FAIL");
+
+				PrintWriter out = response.getWriter();
+				out.print(isOk);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.info(">>>Comment > modify > error");
+			}
+
+			break;
+		case "remove":
+			try {
+				int cno = Integer.parseInt(pathVar); //위에서 pathVar 해논거 써도 됨
+//				int cno = Integer.parseInt(request.getParameter("cno"));
+				log.info("remove > cno >>>>> "+cno);
+				isOk = csv.remove(cno);
+				log.info(isOk > 0 ? "OK" : "FAIL");
+
+				PrintWriter out = response.getWriter();
+				out.print(isOk);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.info(">>>Comment > remove > error");
+			}
+
 			break;
 
 		}

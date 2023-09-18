@@ -9,6 +9,7 @@ import domain.BoardVO;
 import domain.PagingVO;
 import repository.BoardDAO;
 import repository.BoardDAOImpl;
+import service.CommentSerivceImpl;
 
 public class BoardServiceImpl implements BoardService {
 	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
@@ -50,6 +51,12 @@ public class BoardServiceImpl implements BoardService {
 	//remove
 	public int remove(int bno) {
 		log.info("remove service ok");
+		
+		//댓글 먼저 지우고 게시글 삭제
+		//CommentSerivceImpl에 요청.(댓글 지우는거는 commentMapper가 해야하니까)
+		CommentSerivceImpl csv = new CommentSerivceImpl();
+		int isOk=csv.cmtRemove(bno);
+		
 		return bdao.delete(bno);
 	}
 

@@ -55,8 +55,9 @@
 	<div>
 		Comment Line<br>
 		<!-- 비동기방식은 name대신 id를 사용함 -->
-		<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly"><br> 
-		<input type="text" id="cmtText" placeholder="Add Comment"><br>
+		<input type="text" id="cmtWriter" value="${ses.id }"
+			readonly="readonly"><br> <input type="text" id="cmtText"
+			placeholder="Add Comment"><br>
 		<button type="button" id="cmtAddBtn">댓글등록</button>
 		<br>
 
@@ -69,8 +70,8 @@
 			<h2 class="accordion-header">
 				<button class="accordion-button" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseOne"
-					aria-expanded="true" aria-controls="collapseOne">cno,
-					writer, regdate</button>
+					aria-expanded="true" aria-controls="collapseOne">
+					cno,writer, regdate</button>
 			</h2>
 			<div id="collapseOne" class="accordion-collapse collapse show"
 				data-bs-parent="#accordionExample">
@@ -79,10 +80,13 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	const bnoVal=`<c:out value="${bvo.bno}"/>`//* 이렇게 안하고 input hidden방식으로 해도 됨 */
+		const bnoVal = `<c:out value="${bvo.bno}"/>`//* 이렇게 안하고 input hidden방식으로 해도 됨 */
 	</script>
 	<!-- js파일과 jsp파일 연결 -->
 	<script src="/resource/board_detail.js"></script>
+	<script type="text/javascript">
+		printCommentList(bnoVal);
+	</script>
 
 </body>
 </html>

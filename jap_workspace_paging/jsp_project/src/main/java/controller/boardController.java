@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+
+
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +21,7 @@ import domain.PagingVO;
 import handler.PagingHandler;
 import service.BoardService;
 import service.BoardServiceImpl;
+import service.CommentService;
 
 @WebServlet("/brd/*")
 public class boardController extends HttpServlet {
@@ -32,7 +36,7 @@ public class boardController extends HttpServlet {
 	private String destPage;
 	// isOk
 	private int isOk;
-
+	
 	public boardController() {
 		// bsv의 객체 연결
 		bsv = new BoardServiceImpl(); // service class 생성
@@ -175,8 +179,8 @@ public class boardController extends HttpServlet {
 
 			break;
 		case "remove":
-			try {
-				int bno = Integer.parseInt(request.getParameter("bno"));
+			try {			
+				int bno = Integer.parseInt(request.getParameter("bno"));			
 				isOk = bsv.remove(bno);
 				log.info(isOk > 0 ? "OK" : "FAIL");
 				destPage = "pageList";
