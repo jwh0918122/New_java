@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Board Modify Page</h1>
-<form action="/brd/edit">
+<form action="/brd/edit" method="post" enctype="multipart/form-data">
 <table border="1">
 <tr>
 			<th>BNO</th>
@@ -35,6 +35,14 @@
 			<th>MOD_DATE</th>
 			<td>${bvo.moddate }</td>
 		</tr>
+		<tr>
+			<th>IMAGE_FILE</th>
+			<td>
+			<input type="hidden" name="image_File" value="${bvo.image_File }"> 
+			<input type="file" name="new_File" accept="image/png, image/jpg, image/gif, image/jpeg">
+			</td>
+		</tr>
+		
 
 </table>
 

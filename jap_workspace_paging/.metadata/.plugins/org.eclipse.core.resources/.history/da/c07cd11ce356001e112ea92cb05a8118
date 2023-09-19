@@ -1,0 +1,14 @@
+package handler;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import controller.boardController;
+
+public class fileHandler {
+	private static final Logger log = LoggerFactory.getLogger(fileHandler.class);
+	
+	//파일 이름과 경로를 받아서 파일을 삭제하는 메서드
+	//리턴타입 int(isOk) => 잘 삭제했는지 체크하기 위한 변수
+
+}

@@ -1,0 +1,24 @@
+package handler;
+
+import java.io.File;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import controller.boardController;
+
+public class fileHandler {
+	private static final Logger log = LoggerFactory.getLogger(fileHandler.class);
+	
+	//파일 이름과 경로를 받아서 파일을 삭제하는 메서드
+	//리턴타입 boolean(isDel) => 잘 삭제했는지 체크하기 위한 변수
+	public int deleteFile(String imageFileName, String savePath) {
+		boolean isDel = true; //삭제가 잘 이루어졌는지 체크하는 변수
+		log.info("imageFileName >> "+imageFileName);
+		
+		File fileDir = new File(savePath);
+		File removeFile = new File(fileDir+File.separator+imageFileName);
+		File removeThFile = new File(fileDir+File.separator+"_th_"+imageFileName);
+		
+	}
+}

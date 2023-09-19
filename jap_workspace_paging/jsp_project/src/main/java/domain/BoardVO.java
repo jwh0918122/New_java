@@ -8,12 +8,12 @@ public class BoardVO {
 	private String regdate;
 	private String moddate;
 	private int detailcnt;//조회수
+	private String image_File; 
 	
 	public BoardVO () {}
 	
 	//insert용 생성자
 	public BoardVO(String title, String writer, String content) {
-		super();
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
@@ -21,7 +21,6 @@ public class BoardVO {
 	
 	//update용 생성자
 	public BoardVO(int bno, String title, String content) {
-		super();
 		this.bno = bno;
 		this.title = title;
 		this.content = content;
@@ -29,7 +28,6 @@ public class BoardVO {
 	
 	//list용 생성자
 	public BoardVO(int bno, String title, String writer, String regdate, String moddate, int detailcnt) {
-		super();
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
@@ -39,14 +37,14 @@ public class BoardVO {
 	}
 	
 	//detail용 생성자
-	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate) {
-		super();
+	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate, String image_File) {
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.regdate = regdate;
 		this.moddate = moddate;
+		this.image_File=image_File;
 	}
 	
 	//getter, setter
@@ -106,12 +104,21 @@ public class BoardVO {
 		this.detailcnt = detailcnt;
 	}
 
-	//toString
+	public String getImage_File() {
+		return image_File;
+	}
+
+	public void setImage_File(String image_File) {
+		this.image_File = image_File;
+	}
+
 	@Override
 	public String toString() {
-		return bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-				+ regdate + ", moddate=" + moddate ;
+		return bno + " title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
+				+ regdate + ", moddate=" + moddate + ", detailcnt=" + detailcnt + ", image_File=" + image_File;
 	}
+
+
 	
 	
 	

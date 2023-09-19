@@ -35,7 +35,7 @@
 			<th>CONTENT</th>
 			<td>${bvo.content }</td>
 		</tr>
-		<tr>
+		<tr> 
 			<th>REG_DATE</th>
 			<td>${bvo.regdate }</td>
 		</tr>
@@ -44,12 +44,19 @@
 			<td>${bvo.moddate }</td>
 		</tr>
 	</table>
-
+	
+	<div>
+	<c:if test="${bvo.image_File ne '' && bvo.image_File ne null }">
+	<img src="/_fileUpload/${bvo.image_File }">
+	</c:if>
+	</div>
+	
+	<c:if test="${ses.id eq bvo.writer}">
 	<a href="/brd/modify?bno=${bvo.bno }"><button>수정</button></a>
 	<a href="/brd/remove?bno=${bvo.bno }"><button>삭제</button></a>
 	<a href="/brd/pageList"><button>목록으로</button></a>
 	<a href="/index.jsp"><button>인덱스로</button></a>
-
+	</c:if>
 	<br>
 	<hr>
 	<div>

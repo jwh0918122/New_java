@@ -21,7 +21,14 @@
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="org.json.simple.parser.JSONParser"/>
     <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="domain.CommentVO"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="service.CommentSerivceImpl"/>
+    <fullyQualifiedTypeName name="org.apache.commons.fileupload.disk.DiskFileItemFactory"/>
+    <fullyQualifiedTypeName name="org.apache.commons.fileupload.servlet.ServletFileUpload"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="handler.fileHandler"/>
+    <fullyQualifiedTypeName name="net.coobird.thumbnailator.Thumbnails"/>
+    <fullyQualifiedTypeName name="net.coobird.thumbnailator.geometry.Size"/>
 </qualifiedTypeNameHistroy>

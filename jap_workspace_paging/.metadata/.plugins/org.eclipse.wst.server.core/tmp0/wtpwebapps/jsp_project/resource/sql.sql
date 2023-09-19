@@ -6,6 +6,7 @@ writer varchar(100) NOT NULL,
 content text,
 regdate datetime DEFAULT CURRENT_TIMESTAMP,
 moddate datetime DEFAULT CURRENT_TIMESTAMP,
+--첨부파일 추가
 primary key (bno));
 
 --member table--
@@ -26,3 +27,7 @@ writer varchar(200) not null default "unknown",
 content varchar(1000),
 regdate datetime default now(),
 primary key(cno));
+
+--2023-09-19
+--image File 추가
+alter table board add image_File varchar(500);

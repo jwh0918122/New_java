@@ -45,7 +45,14 @@
 		<c:forEach items="${pageList}" var="tmp">
 			<tr>
 				<td><a href="/brd/detail?bno=${tmp.bno }">${tmp.bno }</a></td>
-				<td><a href="/brd/detail?bno=${tmp.bno }">${tmp.title }</a></td>
+				<td>
+				<c:if test="${tmp.image_File ne '' && tmp.image_File ne null }">
+					<img src="/_fileUpload/_th_${tmp.image_File }">
+				
+				
+				</c:if>
+				
+				<a href="/brd/detail?bno=${tmp.bno }">${tmp.title }</a></td>
 				<td>${tmp.writer }</td>
 				<td>${tmp.regdate }</td>
 				<td>${tmp.moddate }</td>
