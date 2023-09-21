@@ -81,7 +81,7 @@ public class commentController extends HttpServlet {
 				}
 				log.info(">>>>>> sb : " + sb.toString());
 
-				// 객체로 변환(js파일에서 가져온거..?)
+				// 객체로 변환(js파일에서 가져온 cmtData)
 				JSONParser parser = new JSONParser();
 				JSONObject jsonObj = (JSONObject) parser.parse(sb.toString());
 
@@ -112,9 +112,13 @@ public class commentController extends HttpServlet {
 				int bno = Integer.parseInt(pathVar);
 				List<CommentVO> list = csv.getList(bno);
 				log.info(">>> comment > list > " + list);
+				
 				// json 형태로 변환 => 화면에 전송
+				//[{...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}]
+				// {...} 한개 확대 ↓
+				//{bno: 142, cno: 16, regdate: '2023-09-20 19:30:51', writer: '11', content: '1111111111'}
 				JSONObject[] jsonObjArr = new JSONObject[list.size()];
-
+				
 				JSONArray jsonList = new JSONArray();
 				for (int i = 0; i < list.size(); i++) {
 					jsonObjArr[i] = new JSONObject(); // key:value 형태
@@ -126,7 +130,8 @@ public class commentController extends HttpServlet {
 
 					jsonList.add(jsonObjArr[i]);
 				}
-				String jsonData = jsonList.toJSONString(); // 전송용
+				String jsonData = jsonList.toJSONString(); // 전송용(JSON String형태)
+				//"[{...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}]" <-따옴표 달아줌
 
 				// 전송 객체에 싣고 화면으로 전송
 				PrintWriter out = response.getWriter();

@@ -28,7 +28,7 @@
     <fullyQualifiedTypeName name="org.apache.commons.fileupload.servlet.ServletFileUpload"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="handler.fileHandler"/>
     <fullyQualifiedTypeName name="net.coobird.thumbnailator.Thumbnails"/>
     <fullyQualifiedTypeName name="net.coobird.thumbnailator.geometry.Size"/>
+    <fullyQualifiedTypeName name="handler.fileHandler"/>
 </qualifiedTypeNameHistroy>

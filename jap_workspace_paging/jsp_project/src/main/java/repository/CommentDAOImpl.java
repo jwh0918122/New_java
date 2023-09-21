@@ -69,4 +69,10 @@ public class CommentDAOImpl implements CommentDAO {
 	
 		return isOk;
 	}
+
+	@Override
+	public int commentCount(int bno) {
+		
+		return sql.selectOne(NS+"commentCount", bno);
+	}
 }

@@ -21,6 +21,8 @@ public interface BoardService {
 
 	List<BoardVO> getPageList(PagingVO pgvo);
 
+	String getFileName(int bno);
+
 
 	
 

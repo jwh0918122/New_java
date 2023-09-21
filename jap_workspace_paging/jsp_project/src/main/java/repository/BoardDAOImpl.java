@@ -10,7 +10,7 @@ import domain.BoardVO;
 import domain.PagingVO;
 import orm.DatabaseBuilder;
 
-public class BoardDAOImpl implements BoardDAO {
+public class BoardDAOImpl implements BoardDAO {	
 	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
 	
 	//DB 연결
@@ -82,6 +82,13 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> pageList(PagingVO pgvo) {
 		log.info("pageList DAO ok");
 		return sql.selectList(NS+"pageList", pgvo);
+	}
+
+	@Override
+	//getFileName
+	public String getFileName(int bno) {
+		
+		return sql.selectOne(NS+"fileName", bno);
 	}
 
 

@@ -55,7 +55,12 @@ public class BoardServiceImpl implements BoardService {
 		//댓글 먼저 지우고 게시글 삭제
 		//CommentSerivceImpl에 요청.(댓글 지우는거는 commentMapper가 해야하니까)
 		CommentSerivceImpl csv = new CommentSerivceImpl();
-		int isOk=csv.cmtRemove(bno);
+		int cnt=csv.commentCount(bno);
+		if(cnt>0) {
+			
+			int isOk=csv.cmtRemove(bno);
+		}
+		
 		
 		return bdao.delete(bno);
 	}
@@ -72,6 +77,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getPageList(PagingVO pgvo) {
 		log.info("pageList service ok");
 		return bdao.pageList(pgvo);
+	}
+
+	@Override
+	//getFileName
+	public String getFileName(int bno) {		
+		return bdao.getFileName(bno);
 	}
 
 

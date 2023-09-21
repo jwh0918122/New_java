@@ -23,6 +23,10 @@
 	<delete id="cmtDeleteAll" parameterType="int">
 		delete from comment where bno=#{bno}
 	</delete>
+	<select id="commentCount" parameterType="int" resultType="int">
+	select count(cno) from comment where bno=#{bno}
+	
+	</select>
 
 
 </mapper>

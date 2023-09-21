@@ -6,7 +6,7 @@ document.getElementById('cmtAddBtn').addEventListener('click', () => {
         alert('댓글을 입력해주세요.');
         return false;
     } else {
-        let cmtData = {
+        let cmtData = { //저장할 객체 생성
             bno: bnoVal,
             writer: document.getElementById('cmtWriter').value,
             content: cmtText
@@ -27,14 +27,14 @@ async function postCommentToServer(cmtData) {
     try {
         const url = "/cmt/post";
         const config = {
-            method: 'post',
+            method: 'post', //생략하면 get
             headers: {
-                'Content-Type': 'application/json; charset=utf-8'
+                'Content-Type': 'application/json; charset=utf-8' //들고가는  type
             },
-            body: JSON.stringify(cmtData)
+            body: JSON.stringify(cmtData) //object를 제이슨을 통해 String화 해서 body에 담기
         };
         const resp = await fetch(url, config);
-        const result = await resp.text(); //0 또는 1 (isOk)
+        const result = await resp.text(); //0 또는 1 (isOk) // trdp.text() => resp은 많은 정보를 담고 있기 때문에 필요한 body정보만 빼논거
         return result;
     } catch (error) {
         console.log(error);
@@ -72,7 +72,7 @@ document.addEventListener('click', (e) => { //화면 전체에 리스너를 주�
         console.log(cno)
 
         //수정 구현 (수정할 데이터를 객체로 생성 -> 컨트롤러에서 수정 요청)
-        let div = e.target.closest('div'); //target을 기준으로 가장 가까운 div를 찾아라★★★★★(잘씀)
+        let div = e.target.closest('div'); //target을 기준으로 가장 가까운 div를 찾아라★★★★★(자주 씀)
         let cmtText1 = div.querySelector('#cmtText').value; // div 에서 'cmtText'의 아이디를 가지고 있는 것의 벨류를 가져오세요
         let writer = e.target.dataset.writer;
 
@@ -139,7 +139,7 @@ async function updateCommentFromServer(cnoVal, cmtWriter, cmtText) {
 async function getCommentListFromServer(bno) {
     try {
         const resp = await fetch('/cmt/list/' + bno);  // /cmt/list/151
-        const result = await resp.json(); //리스트이니까 json으로 
+        const result = await resp.json(); //리스트일테니까 json으로 
         return result;
     } catch (error) {
         console.log(error);

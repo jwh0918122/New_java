@@ -50,4 +50,9 @@ public class CommentSerivceImpl implements CommentService {
 		
 		return cdao.cmtDeleteAll(bno);
 	}
+
+	public int commentCount(int bno) {
+		//BoardServiceImpl에서 요청한 댓글 개수 구하는 메서드
+		return cdao.commentCount(bno);
+	}
 }

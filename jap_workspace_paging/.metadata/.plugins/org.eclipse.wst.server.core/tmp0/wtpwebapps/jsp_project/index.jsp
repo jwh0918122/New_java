@@ -9,12 +9,13 @@
 </head>
 <body>
 	<h1> Index Page </h1>
-	
+	<c:if test="${ses.id eq null}">
 	<form action="mem/login" method="post"> <!-- mem컨트롤러의 메서드로 이동 -->
 	ID : <input type="text" name="id"><br>
 	PW : <input type="text" name="pwd"><br>
 	<button type="submit">login</button>
 	</form>
+	</c:if>
 	<hr>
 	<div>
 	<c:if test="${ses.id ne null }">

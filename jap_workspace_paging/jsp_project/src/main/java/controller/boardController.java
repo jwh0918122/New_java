@@ -2,7 +2,6 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -23,12 +21,9 @@ import domain.BoardVO;
 import domain.PagingVO;
 import handler.PagingHandler;
 import handler.fileHandler;
-import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Size;
 import service.BoardService;
 import service.BoardServiceImpl;
-import service.CommentService;
 
 @WebServlet("/brd/*")
 public class boardController extends HttpServlet {
@@ -96,7 +91,7 @@ public class boardController extends HttpServlet {
 				File fileDir = new File(savePath);
 				log.info("파일 저장 위치 : " + savePath); // 파일 객체 log하면 에러나니까
 
-				/* 파일 객체를 생성하기 위한 객체(파일을 디스크에 쓰기 위한 설정 정보를 설정하는 객체) */
+				/* 파일아이템 객체를 디스크에 쓰기 위한 설정 정보를 설정하는 객체 */
 				DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 				// 저장할 위치 set(file 객체로 지정)
 				fileItemFactory.setRepository(fileDir);
@@ -125,13 +120,14 @@ public class boardController extends HttpServlet {
 						// 이미지는 필수x. 없는 경우에도 처리가 되어야 함
 						// 이미지가 있는지 체크
 						if (item.getSize() > 0) {// 데이터 크기가 있다면 이미지가 있는걸로 처리
-							// 가끔 경로를 포함해서 들어오는 경우가 있어서 substring해서 변수에 이름 저장해줌
-							String fileName = item.getName().substring(item.getName().lastIndexOf("/") + 1); //맵북에서 쓰면 에러남
+							// 가끔 경로를 포함해서 들어오는 경우가 있어서 substring해서 변수에 이름 저장해줌 //~~~~/dog.jpg
+							String fileName = item.getName().substring(item.getName().lastIndexOf("/") + 1); // 맵북에서 쓰면
+																												// 에러남
 							// 시스템의 현재 시간_파일이름.jpg
 							fileName = System.currentTimeMillis() + "_" + fileName;
 
 							// 파일 객체 생성 : D: ~/fileUpload/현재시간_cat2.jpg
-							File uploadFilePath = new File(fileDir + File.separator + fileName);
+							File uploadFilePath = new File(fileDir + File.separator + fileName);//file.separator=/
 							log.info("파일 경로+이름 : " + uploadFilePath);
 
 							// 저장
@@ -252,19 +248,29 @@ public class boardController extends HttpServlet {
 				savePath = getServletContext().getRealPath("/_fileUpload");
 
 				File fileDir = new File(savePath);
-				// 디스크에 기록할 파일 정보를 setting 하는 객체
+				
+				// 디스크에 기록할 파일 정보를 setting 하는 객체 생성
 				DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 				fileItemFactory.setRepository(fileDir);// 저장 경로 설정
 				fileItemFactory.setSizeThreshold(2 * 1024 * 1024);// 임시 저장 용량 설정 2M
 
 				BoardVO bvo = new BoardVO();
-
+				
+				//ServletFileUpload => Servlet프로그램을 경유하고, 파일 데이터를 취득하는 클래스
+				//파일 데이터는 FileItem오프젝트가 저장되었던 List콜렉션으로 반환됨.(↓다음 줄)
 				ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
 				log.info(">> update 준비 >> ");
-
+				
+				
+				//파일데이터(FileItem오브젝트)를 취득하고, List오브젝트로써 리턴한다.
 				List<FileItem> itemList = fileUpload.parseRequest(request);
-				String old_file = null; // 수정하기 전 원래 글미 파일
-
+				String old_file = null; // 수정하기 전 원래 그림 파일
+				/*FileItem 오브젝트에 대한 메소드*/
+				// 1. String getName()=>업로드된 파일의 파일명을 돌려준다.(파일명은 path명도 포함)
+				// 2. void write(File)=>업로드된 데이터를 인수로 지정된 파일에 쓴다.
+				
+				
+				
 				for (FileItem item : itemList) {
 					switch (item.getFieldName()) {
 					case "bno":
@@ -281,44 +287,41 @@ public class boardController extends HttpServlet {
 						old_file = item.getString("utf-8");
 						break;
 					case "new_File":
-						//새로운 파일이 있는지 확인
-						if(item.getSize()>0) {							
-							if(old_file!=null) {
-								//기존 파일 삭제 (기존 파일이 있을 경우)
+						// 새로운 파일이 있는지 확인
+						if (item.getSize() > 0) {
+							if (old_file != null) {
+								// 기존 파일 삭제 (기존 파일이 있을 경우)
 								fileHandler fileHandler = new fileHandler();
 								isOk = fileHandler.deleteFile(old_file, savePath);
-														
+
 							}
-							//new 파일의 경로와 파일명 생성
-							String fileName = item.getName().substring(item.getName().lastIndexOf(File.separator)+1);
-							
-							log.info("new_fileName"+fileName);
-							
-							//실제 저장되 파일 이름
-							fileName = System.currentTimeMillis()+"_"+fileName;
-							
-							File uploadFilePath = new File(fileDir+File.separator+fileName);
-							
-							//저장
+							// new 파일의 경로와 파일명 생성
+							String fileName = item.getName().substring(item.getName().lastIndexOf(File.separator) + 1);
+
+							log.info("new_fileName" + fileName);
+
+							// 실제 저장되 파일 이름
+							fileName = System.currentTimeMillis() + "_" + fileName;
+
+							File uploadFilePath = new File(fileDir + File.separator + fileName);
+
+							// 저장
 							try {
 								item.write(uploadFilePath);
 								bvo.setImage_File(fileName);
-								
-								//썸네일 작업
+
+								// 썸네일 작업
 								Thumbnails.of(uploadFilePath).size(30, 30)
-								.toFile(new File(fileDir+File.separator+"_th_"+fileName));
-								
+										.toFile(new File(fileDir + File.separator + "_th_" + fileName));
+
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						
-						
-						
-						}else {	//새로운 파일이 없다면... 기존 파일을 다시 담기
+
+						} else { // 새로운 파일이 없다면... 기존 파일을 다시 담기
 							bvo.setImage_File(old_file);
 						}
-						
-						
+
 						break;
 
 					}
@@ -327,11 +330,7 @@ public class boardController extends HttpServlet {
 				isOk = bsv.modify(bvo);
 				log.info(isOk > 0 ? "OK" : "FAIL");
 				destPage = "pageList";
-				
-				
-				
-				
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -354,6 +353,16 @@ public class boardController extends HttpServlet {
 		case "remove":
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
+				//삭제할 bno의 image_file Name을 불러오기
+				String fileName=bsv.getFileName(bno);
+				
+				//savePath 생성
+				savePath =getServletContext().getRealPath("/_fileUpload");
+				//파일 핸들러에 삭제 요청
+				fileHandler fileHandler=new fileHandler();
+				isOk=fileHandler.deleteFile(fileName, savePath);
+				log.info((isOk>0)? "file remove Ok":"file remove fail");
+				
 				isOk = bsv.remove(bno);
 				log.info(isOk > 0 ? "OK" : "FAIL");
 				destPage = "pageList";
