@@ -1,0 +1,26 @@
+package serivce;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import controller.boardController;
+import domain.BoardVO;
+import repository.BoardDAO;
+import repository.BoardDAOImpl;
+
+public class BoardServiceImpl implements BoardService {
+	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
+	private BoardDAO bdao; //BoardDAO interface
+	
+	public BoardServiceImpl() {
+		//BoardDAO class
+		bdao=new BoardDAOImpl(); 
+	}
+
+	//write
+	public int write(BoardVO bvo) {
+		log.info("write service ok");
+		return bdao.write(bvo);
+	}
+
+}

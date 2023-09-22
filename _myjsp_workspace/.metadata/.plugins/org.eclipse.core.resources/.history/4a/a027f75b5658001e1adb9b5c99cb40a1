@@ -1,0 +1,9 @@
+package serivce;
+
+import domain.MemberVO;
+
+public interface MerberService {
+
+	MemberVO getLoginMvo(MemberVO mvo);
+
+}

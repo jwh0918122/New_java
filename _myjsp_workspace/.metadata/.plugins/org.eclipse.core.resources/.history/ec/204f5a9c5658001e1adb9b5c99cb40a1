@@ -1,0 +1,13 @@
+package repository;
+
+import domain.MemberVO;
+
+public interface MemberDAO {
+
+	MemberVO getLoginMvo(MemberVO mvo);
+
+	int join(MemberVO mvo);
+
+	int join(MemberVO mvo);
+
+}

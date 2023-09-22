@@ -1,0 +1,13 @@
+package serivce;
+
+import java.util.List;
+
+import domain.BoardVO;
+
+public interface BoardService {
+
+	int write(BoardVO bvo);
+
+	List<BoardVO> getList();
+
+}

@@ -1,0 +1,47 @@
+package serivce;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import controller.memberController;
+import domain.MemberVO;
+import repository.MemberDAO;
+import repository.MemberDAOImpl;
+
+public class MemberServiceImpl implements MerberService {
+	//로그 객체
+	private static final Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
+	//MemberDAO interface
+	private MemberDAO mdao;
+	
+	public MemberServiceImpl() {
+		mdao = new MemberDAOImpl();	
+	}
+
+	//login
+	public MemberVO getLoginMvo(MemberVO mvo) {
+		log.info("login service ok");
+		return mdao.getLoginMvo(mvo);
+	}
+
+	//join
+	public int join(MemberVO mvo) {
+		log.info("join service ok");
+		return mdao.join(mvo);
+	}
+
+	//logout
+	public int logout(String id) {
+		log.info("logout service ok");
+		return mdao.logout(id);
+	}
+
+	//memberList
+	public List<MemberVO> getList() {
+		log.info("memberList service ok");
+		return mdao.memberList();
+	}
+	
+}

@@ -1,0 +1,20 @@
+package domain;
+
+public class MemverVO {
+	private String id;
+	private String pw;
+	private String name;
+	private int age;
+	private String phone;
+	private String regDate;
+	private String lastLogin;
+	public MemverVO(String id, String pw, String name, int age, String phone) {
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.age = age;
+		this.phone = phone;
+	}
+	
+
+}

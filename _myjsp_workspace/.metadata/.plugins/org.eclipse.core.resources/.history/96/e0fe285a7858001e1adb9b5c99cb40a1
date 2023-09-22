@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<select id="login" parameterType="mvo" resultType="mvo">
+		select * from member where id=#{id} and pw=#{pw}
+	</select>
+	<insert id="join" parameterType="mvo">
+		insert into member(id,pw,name,age,phone,gender)
+		values(#{id},#{pw},#{name},#{age},#{phone},#{gender})
+	</insert>
+	<update id="logout" parameterType="string">
+	update member set lastLogin=now() where id=#{id}	
+	</update>
+	<select id="memberList" resultType="mvo">
+	select * from member
+	</select>
+	<delete id="remove" parameterType="string">
+	delete from member where id=#{id}
+	</delete>	
+	<select id="detail" parameterType="string" resultType="mvo">
+	select * from member where id=#{id}
+	</select>
+	<select id="memberTotalCnt" parameterType="pgv" resultType="int">
+	select count(*) from member
+	</select>
+</mapper>

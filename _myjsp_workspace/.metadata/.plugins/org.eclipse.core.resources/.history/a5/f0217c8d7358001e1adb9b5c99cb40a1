@@ -1,0 +1,29 @@
+package controller;
+
+import domain.PagingVO;
+
+public class PagingHandler {
+	private int startPagination;//현재 화면에서 보여지는 시작 페이지네이션 번호
+	private int endPagination;//현재 화면에 보여지는 끝 페이지네이션 번호
+	private int realEndPagination;//실제 마지막 페이지네이션 번호
+	private boolean prev,next;//이전, 다음페이지 존재여부(있거나, 없거나임)
+	private int paginationCnt=10 //한 화면에 보이는 페이지네이션 갯수
+	
+	private PagingVO pgv; //현재 페이지네이션 번호, 한 페이지의 게시물 수
+	private int totalCnt;//전체 게시글 수
+	
+	public PagingHandler(PagingVO pgv, int totalCnt) {
+		this.pgv=pgv;
+		this.totalCnt=totalCnt;
+		
+		//paginaionNo => PageIndexStart 
+		//1 => 0
+		//2 => 10
+		//3 => 20
+
+		this.endPagination=
+				(int)Math.ceil(pgv.getPageIndexStart()*(double))
+				
+	}
+
+}

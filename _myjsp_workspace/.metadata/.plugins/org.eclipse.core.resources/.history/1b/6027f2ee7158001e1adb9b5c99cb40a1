@@ -1,0 +1,43 @@
+package domain;
+
+public class PagingVO {
+	private int pageNo; // 현재 페이지
+	private int qty; // 한 페이지에 있는 게시물 수
+
+	// 자동으로 세팅 되어있는 거
+	public PagingVO() {
+		this.pageNo = 1;
+		this.qty = 10;
+	}
+
+	// 값이 바뀌면
+	public PagingVO(int pageNo, int qty) {
+		this.pageNo = pageNo;
+		this.qty = qty;
+	}
+
+	// pageNo => pageStart~pageEnd
+	// 1 => 0~9
+	// 2=> 10~19
+	// 3=> 20~29
+	public int getPageStart(int pageNo, int qty) {
+		return (pageNo - 1) * qty;
+	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+}

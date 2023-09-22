@@ -1,0 +1,19 @@
+package serivce;
+
+import java.util.List;
+
+import domain.MemberVO;
+
+public interface MerberService {
+
+	MemberVO getLoginMvo(MemberVO mvo);
+
+	int join(MemberVO mvo);
+
+	int logout(String id);
+
+	List<MemberVO> getList();
+
+	int remove(String id);
+
+}

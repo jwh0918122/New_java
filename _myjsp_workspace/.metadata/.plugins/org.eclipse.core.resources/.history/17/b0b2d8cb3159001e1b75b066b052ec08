@@ -1,0 +1,9 @@
+package serivce;
+
+import domain.BoardVO;
+
+public interface BoardService {
+
+	int write(BoardVO bvo);
+
+}
